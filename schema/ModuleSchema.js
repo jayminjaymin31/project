@@ -11,7 +11,7 @@ const moduleSchema = Schema({
     moduleName:{
         type: String
     },
-    description:{
+    description:{   
         type: String
     },
     estimatedHours:{

@@ -1,5 +1,30 @@
 const projectSchema =require("../schema/ProjectSchema");
 
+
+
+const getModuleIdByProject = (req, res) => {
+    const projectId = req.params.id;
+    projectSchema.find({ projects: projectId })
+  
+      .exec((err, module) => {
+        if (err) {
+          return res.status(500).json({
+            message: 'Error in getting module',
+            error: err
+          });
+        }
+        if (!module) {
+          return res.status(404).json({
+            message: 'No module found for this project ID'
+          });
+        }
+        return res.status(200).json({
+          module: module
+        });
+      });
+  };
+  
+
 const updateProject = (req, res) => {
 
     const id = req.params.id
@@ -165,5 +190,6 @@ module.exports = {
         updateProject,
         deleteProject,
         getProjectById,
-        getAllProject
+        getAllProject,
+        getModuleIdByProject
 }

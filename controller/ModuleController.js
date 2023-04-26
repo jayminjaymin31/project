@@ -63,8 +63,8 @@ const moduleSchema = require("../schema/ModuleSchema")
 const getModuleIdByProject = (req, res) => {
     const projectId = req.params.id;
     moduleSchema.find({ projects: projectId })
-      .populate('projects', 'title')
-      .populate('status', 'statusName')
+      .populate('projects')
+      .populate('status')
       .exec((err, module) => {
         if (err) {
           return res.status(500).json({
