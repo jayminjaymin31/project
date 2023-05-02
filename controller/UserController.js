@@ -82,12 +82,12 @@ const registerUser = async(req,res)=>{
 
 const getUserData = (req, res) => {
 
-
-    userSchema.find((err, data) => {
+    userSchema.find()
+    .populate('role') // add this line to populate the "role" field
+    .exec((err, data) => {
         if (err) {
             res.status(404).json({
                 message: "error in fetching data",
-
             })
         }
         else {
@@ -96,10 +96,10 @@ const getUserData = (req, res) => {
                 data: data
             })
         }
-
     })
 
 }
+
 
 const getUserById = (req, res) => {
     var id = req.params.id

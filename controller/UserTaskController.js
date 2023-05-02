@@ -1,4 +1,5 @@
 
+const { populate } = require("../schema/UserSchema");
 const userTaskSchema = require("../schema/UserTaskSchema")
 
 
@@ -8,8 +9,8 @@ const getUserTeamByUserId = (req, res) => {
     const projectId = req.params.id;
     userTaskSchema.find({ user: projectId })
       .populate('user')
-      .populate('task')
-      .exec((err, module) => {
+      .populate('task').
+        exec((err, module) => {
         if (err) {
           return res.status(500).json({
             message: 'Error in getting task',

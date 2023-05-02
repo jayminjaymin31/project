@@ -44,7 +44,27 @@ const getAllStatus = (req, res) => {
     })
 
 }
+
+const getUserById = (req, res) => {
+    var id = req.params.id
+
+    statusSchema.findById(id)
+        .exec((err, data) => {
+            if (err) {
+                res.status(404).json({
+                    message: "error in fetching data",
+                    err: err
+                })
+            } else {
+                res.status(200).json({
+                    message: "data fetched successfully",
+                    data: data
+                })
+            }
+        })
+}
 module.exports = {
     addStatus,
-    getAllStatus
+    getAllStatus,
+    getUserById
 }
